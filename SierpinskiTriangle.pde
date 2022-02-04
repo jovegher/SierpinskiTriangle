@@ -1,28 +1,25 @@
 public void setup()
 {
-  size(1200, 1200);
-  smooth();
-  fill(50);
+  size(1200,1200);
+  fill((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255));
 }
 public void draw()
 {
   background(0);
-  sierpinski(width / 2, height / 2, 200);
+  sierpinski(0, 1199, 1200);
 }
 public void mouseDragged()//optional
 {
+
 }
-public void sierpinski(int x, int y, int l, int depth, int base) 
+public void sierpinski(int x, int y, int len) 
 {
-  if (depth == base) {
-    tri(x,y,l);
-  } else {
-    tri(x,y,l);
-    sierpinski(x, y, l / 2, depth + 1, base);
-    sierpinski(x + l / 4, y - sin(PI / 3) * l / 2, l / 2, depth + 1, base);
-    sierpinski(x + l / 2, y, l / 2, depth + 1, base);
+  if(len<=5){
+    triangle(x, y, x+len, y, x+len/2, y-len);
+  }
+  else{
+    sierpinski(x+len/2, y, len/2);
+    sierpinski(x+len/4, y-len/2, len/2);
+    sierpinski(x, y, len/2);
   }
 }
-public tri(int x, int y, int l) {
-    triangle(x, y, x + l / 2, y - sin(PI / 3) * l, x + l, y);
-  }
